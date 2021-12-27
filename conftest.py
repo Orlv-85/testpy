@@ -1,36 +1,23 @@
 import pytest
-import requests
+import users_client
+import set_conftest
 
-class UsersClient:
+uc = users_client.UsersClient(set_conftest.host_name, set_conftest.port_name)
 
-    def __init__(self, host, port):
-        self.host = host
-        self.port = port
-
-    def get_users (self, departament):
-         if departament==0:
-
-           resp=requests.get('%s%s/users'%(self.host, self.port))
-
-         else:
-
-           resp=requests.get('%s%s/users'%(self.host, self.port), {'departament':'%s'%(departament)})
-
-         return resp.text
-
-uc=UsersClient('http://127.0.0.1', ':5000')
 
 @pytest.fixture()
 def get_userlist():
-    resp=uc.get_users (0)
+    resp = uc.get_users()
     return resp
+
 
 @pytest.fixture()
 def get_departament_userlist():
-    resp=uc.get_users ('Dwarf')
+    resp = uc.get_users('Dwarf')
     return resp
+
 
 @pytest.fixture()
 def get_unkdepartament_userlist():
-    resp=uc.get_users ('Dvarf')
+    resp = uc.get_users('Dvarf')
     return resp
