@@ -1,0 +1,24 @@
+version: "3"
+
+services:
+    dockeruserclient:
+    
+        build: dockeruserclient/
+            
+            
+        command: flask run
+        
+        ports:
+            - 5000:5000
+            
+    docker_testpy:
+    
+        build: docker_testpy/
+            
+            
+        command: pytest
+        
+        network_mode: host
+   
+        depends_on:
+            - dockeruserclient
