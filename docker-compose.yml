@@ -5,8 +5,7 @@ services:
     
         build: dockeruserclient/
             
-            
-        command: flask run
+        
         
         ports:
             - 5000:5000
@@ -16,8 +15,7 @@ services:
         build: docker_testpy/
             
             
-        command: pytest
-        
+                
         network_mode: host
    
         depends_on:
